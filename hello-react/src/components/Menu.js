@@ -14,6 +14,8 @@ const Menu = () => {
                 <li><Link to="/about">About</Link></li>
                 <li><NavLink to="/about/good" activeStyle={style01}>About good</NavLink></li>
                 <li><NavLink to="/posts" activeStyle={style01}>Posts</NavLink></li>
+                <li><NavLink to="/myname/정준일" activeStyle={style01}>P001_MyName</NavLink></li>
+                <li><NavLink to="/counter" activeStyle={style01}>P002_Counter</NavLink></li>
             </ul>
             <hr/>
         </div>

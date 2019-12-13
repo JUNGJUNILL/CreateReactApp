@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import { Home, About,Posts } from 'pages';
+import Counter from 'Study/P002_Counter';
+import MyName from 'Study/P001_MyName';
 import Menu from '../components/Menu'
 
 
@@ -26,6 +28,9 @@ class App extends Component {
                 나머지는 보여주지 않습니다.
                 */}
                 <Route path="/posts" component={Posts}/>
+                <Route path="/myname/:name" component={MyName}/>
+                <Route path="/counter" component={Counter}/>
+                 
         
             </div>
            
