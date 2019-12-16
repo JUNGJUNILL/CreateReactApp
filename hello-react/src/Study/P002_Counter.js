@@ -18,17 +18,24 @@ class Counter extends Component{
       }
       
   constructor(props) {
+    //컴포넌트 생성자 함수, 컴포넌트가 새로 만들어질 때마다 이 함수가 호출됩니다.
     super(props);
     console.log('constructor');
   }
   
+  
   componentWillMount() {
+    //deprecated
+
     console.log('componentWillMount (deprecated)');
   }
 
   componentDidMount() {
       //여러분의 컴포넌트가 화면에 나타나게 됐을 때 호출됩니다.
-      // 외부 라이브러리 연동을 하거나, 해당 컴포넌트에서 필요로하는 데이터를 요청하기 위해 axios, fetch 등을 통하여 ajax 요청을 하거나, DOM 의 속성을 읽거나 직접 변경하는 작업을 진행합니다.
+      // 외부 라이브러리 연동을 하거나, 해당 컴포넌트에서 필요로하는 데이터를 요청하기 위해 
+      //axios, fetch 등을 통하여 ajax 요청을 하거나, DOM 의 속성을 읽거나 
+      //직접 변경하는 작업을 진행합니다.
+      
     console.log('componentDidMount');
   }
 

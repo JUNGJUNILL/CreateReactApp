@@ -1,13 +1,35 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import { Home, About,Posts } from 'pages';
-import Counter from 'Study/P002_Counter';
-import MyName from 'Study/P001_MyName';
+import {MyName,Counter,PhoneForm } from 'Study';
 import Menu from '../components/Menu'
 
 
 class App extends Component {
+
+    id = 2
+    state = {
+      information: [
+        {
+          id: 0,
+          name: '김민준',
+          phone: '010-0000-0000'
+        },
+        {
+          id: 1,
+          name: '홍길동',
+          phone: '010-0000-0001'
+        }
+      ]
+    }
+    handleCreate = (data) => {
+      const { information } = this.state;
+      this.setState({
+        information: information.concat({ id: this.id++, ...data })
+      })
+    }
     render() {
+        const { information } = this.state;
         return (
          
               
@@ -29,9 +51,10 @@ class App extends Component {
                 */}
                 <Route path="/posts" component={Posts}/>
                 <Route path="/myname/:name" component={MyName}/>
-                <Route path="/counter" component={Counter}/>
-                 
-        
+                <Route path="/counter" component={Counter}/>  
+                <Route path="/phonebook" render={()=>(<PhoneForm onCreate={this.handleCreate} /> )}/>
+                                         {/*react Router로 props 보내는 방법*/}
+                                         {JSON.stringify(information)}
             </div>
            
         );
