@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import { Home, About,Posts } from 'pages';
-import {MyName,Counter,PhoneForm } from 'Study';
+import {MyName,Counter,PhoneForm,PhoneInfo,PhoneInfoList} from 'Study';
 import Menu from '../components/Menu'
 
 
@@ -25,11 +25,11 @@ class App extends Component {
     handleCreate = (data) => {
       const { information } = this.state;
       this.setState({
-        information: information.concat({ id: this.id++, ...data })
+        information: information.concat({ id: this.id++, ...data }) //이 문법은 이해가 안된다. 
       })
     }
     render() {
-        const { information } = this.state;
+       
         return (
          
               
@@ -52,9 +52,14 @@ class App extends Component {
                 <Route path="/posts" component={Posts}/>
                 <Route path="/myname/:name" component={MyName}/>
                 <Route path="/counter" component={Counter}/>  
-                <Route path="/phonebook" render={()=>(<PhoneForm onCreate={this.handleCreate} /> )}/>
+                <Route path="/phonebook" render={()=>(
+                                                      <div>
+                                                        <PhoneForm onCreate={this.handleCreate} />
+                                                        <PhoneInfoList data={this.state.information}/>
+                                                      </div>
+                                                      )}/>
                                          {/*react Router로 props 보내는 방법*/}
-                                         {JSON.stringify(information)}
+                                         
             </div>
            
         );
