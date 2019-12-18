@@ -22,17 +22,33 @@ class App extends Component {
         }
       ]
     }
+    
     handleCreate = (data) => {
       const { information } = this.state;
       this.setState({
         information: information.concat({ id: this.id++, ...data }) //이 문법은 이해가 안된다. 
       })
     }
-    render() {
-       
-        return (
-         
-              
+
+    handleRemove = (id)=>{
+      const {information} = this.state; 
+      this.setState({
+        information : information.filter(info=> info.id !== id)
+      })
+    }
+
+    handleUpdate =(id,data)=>{
+
+      const {information} = this.state; 
+      this.setState({
+        information : information.map(
+          info=> id ===info.id? {...info,...data} : info)
+      })
+    }
+    
+
+    render() {     
+        return (    
             <div>   
 
                 <Route  path="/" component={Menu}/>       
@@ -53,10 +69,13 @@ class App extends Component {
                 <Route path="/myname/:name" component={MyName}/>
                 <Route path="/counter" component={Counter}/>  
                 <Route path="/phonebook" render={()=>(
-                                                      <div>
-                                                        <PhoneForm onCreate={this.handleCreate} />
-                                                        <PhoneInfoList data={this.state.information}/>
-                                                      </div>
+                <div>
+                  <PhoneForm onCreate={this.handleCreate} />
+                  <PhoneInfoList data={this.state.information}
+                                 onRemove={this.handleRemove}
+                                 onUpdate={this.handleUpdate}
+                  />
+                </div>
                                                       )}/>
                                          {/*react Router로 props 보내는 방법*/}
                                          

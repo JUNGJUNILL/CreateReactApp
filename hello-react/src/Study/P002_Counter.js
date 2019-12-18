@@ -72,6 +72,8 @@ return 'hello'
 }
 
 componentDidUpdate(prevProps, prevState, snapshot) {
+//최초 렌더링에서는 호출되지 않는다. 
+//갱신이 일어난 직후에 호출된다. 
 //컴포넌트 자신의 render 함수에서 에러가 발생해버리는 것은 잡아낼 수는 없지만
 //그 대신에 자식 컴포넌트 내부에서 발생하는 에러들을 잡아낼 수 있다. 
     console.log('snapshot==>' , snapshot);
