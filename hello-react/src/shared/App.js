@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import { Home, About,Posts } from 'pages';
-import {MyName,Counter,PhoneForm,PhoneInfo,PhoneInfoList} from 'Study';
+import {MyName,Counter,PhoneForm,PhoneInfo,PhoneInfoList,PhonebookInput} from 'Study';
 import Menu from '../components/Menu'
 
 
@@ -20,7 +20,14 @@ class App extends Component {
           name: '홍길동',
           phone: '010-0000-0001'
         }
-      ]
+      ],
+      keyword: '',
+    }
+
+    handleChange= (e) =>{
+      this.setState({
+          keyword:e.target.value, 
+      });
     }
     
     handleCreate = (data) => {
@@ -71,6 +78,19 @@ class App extends Component {
                 <Route path="/phonebook" render={()=>(
                 <div>
                   <PhoneForm onCreate={this.handleCreate} />
+                  <p>
+                  <input 
+                      placeholder="검색 할 이름을 입력하세요..."
+                      onChange={this.handleChange}
+                      value={this.state.keyword}
+                  />
+                  {/*input에 입력시 
+                    App 컴포넌트의 상태가 업데이터 되면,
+                    컴포넌트 리렌더링이 발생하게 되고,
+                    컴포넌트가 리렌더링 되면 그 컴포넌트의 
+                    자식 컴포넌트도 리렌더링 됩니다.
+                  */}
+                </p>
                   <PhoneInfoList data={this.state.information}
                                  onRemove={this.handleRemove}
                                  onUpdate={this.handleUpdate}
