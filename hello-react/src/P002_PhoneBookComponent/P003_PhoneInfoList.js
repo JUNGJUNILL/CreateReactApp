@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PhoneInfo from './P004_PhoneInfo';
+import PhoneInfo from './P002_PhoneInfo';
 
 class PhoneInfoList extends Component {
 
@@ -8,7 +8,9 @@ class PhoneInfoList extends Component {
     }
 
     shouldComponentUpdate(nextProps,nextState){
-        console.log("nextProps.data:",nextProps.data,":","this.props.data:",this.props.data); 
+        nextProps.data.map((v)=> console.log('nextProps.data',v.name)) 
+        this.props.data.map((v)=> console.log('this.props',v.name)) 
+        
         return nextProps.data !== this.props.data; 
         //return 값이 false이면 render 안함 
         //return 값이 true 이면 render 함 
@@ -17,7 +19,6 @@ class PhoneInfoList extends Component {
     render(){
         console.log('PhoneInfoList'); 
         const {data,onRemove,onUpdate} = this.props;
-        console.log('PhoneInfoList.js/data--->', data); 
         const list = data.map(
             (info)=>{ return<PhoneInfo 
                             key={info.id} 

@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import { Home, About,Posts } from 'pages';
-import {MyName,Counter,PhoneForm,PhoneInfo,PhoneInfoList,PhonebookInput} from 'Study';
 import Menu from '../components/Menu'
+import {MyName,Counter} from 'P001_StudyComponent'
+import {PhoneForm,PhoneInfo,PhoneInfoList,PhonebookInput} from 'P002_PhoneBookComponent';
+import {TodoListTemplate,Form ,TodoItemList} from 'P003_TodoListComponent';
+
 
 
 class App extends Component {
@@ -55,6 +58,12 @@ class App extends Component {
     
 
     render() {     
+
+        const {information,keyword} = this.state; 
+        const filterList = information.filter(
+          info=> info.name.indexOf(keyword) !== -1
+        ); 
+
         return (    
             <div>   
 
@@ -75,6 +84,11 @@ class App extends Component {
                 <Route path="/posts" component={Posts}/>
                 <Route path="/myname/:name" component={MyName}/>
                 <Route path="/counter" component={Counter}/>  
+                
+              
+              
+              
+{/*P002_PhoneBookComponent*/}
                 <Route path="/phonebook" render={()=>(
                 <div>
                   <PhoneForm onCreate={this.handleCreate} />
@@ -91,14 +105,27 @@ class App extends Component {
                     자식 컴포넌트도 리렌더링 됩니다.
                   */}
                 </p>
-                  <PhoneInfoList data={this.state.information}
+                  <PhoneInfoList data={filterList}
                                  onRemove={this.handleRemove}
                                  onUpdate={this.handleUpdate}
                   />
                 </div>
                                                       )}/>
                                          {/*react Router로 props 보내는 방법*/}
-                                         
+
+
+{/*P003_TodoListComponent*/}
+                <Route path='/todoListtmplate' render={()=>(
+                  <TodoListTemplate form={<Form />} >
+                     <TodoItemList />
+                  </TodoListTemplate>
+
+
+                
+
+                )} />
+                 
+
             </div>
            
         );
