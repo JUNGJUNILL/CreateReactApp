@@ -4,7 +4,7 @@ import { Home, About,Posts } from 'pages';
 import Menu from '../components/Menu'
 import {MyName,Counter} from 'P001_StudyComponent'
 import {PhoneForm,PhoneInfo,PhoneInfoList,PhonebookInput} from 'P002_PhoneBookComponent';
-import {TodoListTemplate,Form ,TodoItemList} from 'P003_TodoListComponent';
+import {TodoListTemplate,Form ,TodoItemList,Palette} from 'P003_TodoListComponent';
 
 
 
@@ -12,6 +12,7 @@ class App extends Component {
 
     id = 2
     state = {
+
       information: [
         {
           id: 0,
@@ -24,9 +25,21 @@ class App extends Component {
           phone: '010-0000-0001'
         }
       ],
-      keyword: '',
-    }
 
+      todos:[
+          {id:0, text: '  리액트 소개', checked: false},
+          {id:1, text: '  리액트 소개', checked: true},
+          {id:2, text: '  리액트 소개', checked: false},
+
+      ],
+      todosInput:'',
+      keyword: '',
+      color:'',
+
+
+
+    }
+//start P002_PhoneBookComponent---------------------------------------------
     handleChange= (e) =>{
       this.setState({
           keyword:e.target.value, 
@@ -36,7 +49,7 @@ class App extends Component {
     handleCreate = (data) => {
       const { information } = this.state;
       this.setState({
-        information: information.concat({ id: this.id++, ...data }) //이 문법은 이해가 안된다. 
+        information: information.concat({ id: this.id++, ...data }) //객체 spread 문법이다.
       })
     }
 
@@ -55,7 +68,68 @@ class App extends Component {
           info=> id ===info.id? {...info,...data} : info)
       })
     }
+//end P002_PhoneBookComponent---------------------------------------------
     
+
+//start P003_TodoListComponent---------------------------------------------
+    toDohandleChange= (e)=>{
+      this.setState({
+        todosInput: e.target.value,
+      });
+    }
+
+    toDohandleCreate = ()=>{
+      const {todosInput, todos} = this.state; 
+      console.log('todos.id==',todos.id)
+      this.setState({
+        todosInput:'',
+        todos: todos.concat({
+            id:this.id++,
+            text:todosInput,
+            checked:false, 
+        })
+      });
+    }
+
+    toDohandleKeyPress=(e) =>{
+      if(e.key === 'Enter'){
+        this.toDohandleCreate();
+      }
+
+    }
+
+    toDoHandleToggle= (id) =>{
+      console.log('toDoHandleToggle==>', id); 
+      const {todos} = this.state; 
+
+      const index = todos.findIndex(todo => todo.id ===id); 
+      const selected = todos[index]; 
+      const nextTodos = [...todos]; 
+
+      nextTodos[index] = {
+        ...selected,
+        checked: !selected.checked, 
+      }; 
+
+      this.setState({
+        todos:nextTodos,
+      })
+
+    }
+
+    todohandleRemove =(id)=>{
+      const {todos} = this.state; 
+      this.setState({
+        todos:todos.filter(todo=> todo.id !==id)
+      })
+    }
+
+    todoColors = ()=>{
+      const colorsArray = ['#343a40', '#f03e3e', '#12b886', '#228ae6']; 
+      return colorsArray; 
+    }
+//end P003_TodoListComponent---------------------------------------------
+
 
     render() {     
 
@@ -63,6 +137,18 @@ class App extends Component {
         const filterList = information.filter(
           info=> info.name.indexOf(keyword) !== -1
         ); 
+
+        const colorsArray= this.todoColors(); 
+
+        const { todosInput,todos } = this.state; 
+        const {
+              toDohandleChange,
+              toDohandleCreate,
+              toDohandleKeyPress,
+              toDoHandleToggle,
+              todohandleRemove
+
+              } = this; 
 
         return (    
             <div>   
@@ -116,9 +202,29 @@ class App extends Component {
 
 {/*P003_TodoListComponent*/}
                 <Route path='/todoListtmplate' render={()=>(
-                  <TodoListTemplate form={<Form />} >
-                     <TodoItemList />
+                  
+                  <TodoListTemplate form={<Form
+                                              value={todosInput}
+                                              onkeyPress={toDohandleKeyPress}
+                                              onChange={toDohandleChange}
+                                              onCreate={toDohandleCreate}
+                                          />} 
+
+                                    palette={<Palette 
+                                                colors={colorsArray}
+                                               
+                                          />}   
+                                          >
+                                    
+                                            
+                     
+                     <TodoItemList 
+                                todos={todos} 
+                                onToggle={toDoHandleToggle} 
+                                onRemove={todohandleRemove}
+                                />
                   </TodoListTemplate>
+                  
 
 
                 
