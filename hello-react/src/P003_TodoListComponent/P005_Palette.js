@@ -6,7 +6,7 @@ import './Palette.css';
 
 const Color = ({color,active,onClick})=>{
 
-  return(  <div className={`color ${active && 'active'}`} style={{background:color}} onClick={onClick}>
+  return(  <div className={`color ${active? 'active':''}`} style={{background:color}} onClick={onClick}>
            </div>
         )
 }
