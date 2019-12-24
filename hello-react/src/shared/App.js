@@ -29,12 +29,11 @@ class App extends Component {
       todos:[
           {id:0, text: '  리액트 소개', checked: false},
           {id:1, text: '  리액트 소개', checked: true},
-          {id:2, text: '  리액트 소개', checked: false},
 
       ],
       todosInput:'',
       keyword: '',
-      color:'',
+      color:'#343a40',
 
 
 
@@ -79,14 +78,15 @@ class App extends Component {
     }
 
     toDohandleCreate = ()=>{
-      const {todosInput, todos} = this.state; 
-      console.log('todos.id==',todos.id)
+      const {todosInput, todos, color} = this.state; 
+      console.log('todos.id==',todos.id,'color',color); 
       this.setState({
         todosInput:'',
         todos: todos.concat({
             id:this.id++,
             text:todosInput,
             checked:false, 
+            color:color,
         })
       });
     }
@@ -128,12 +128,18 @@ class App extends Component {
       const colorsArray = ['#343a40', '#f03e3e', '#12b886', '#228ae6']; 
       return colorsArray; 
     }
+
+    todoOnSelector =(color)=>{
+      this.setState({
+        color:color
+      })
+    }
 //end P003_TodoListComponent---------------------------------------------
 
 
     render() {     
 
-        const {information,keyword} = this.state; 
+        const {information,keyword,color} = this.state; 
         const filterList = information.filter(
           info=> info.name.indexOf(keyword) !== -1
         ); 
@@ -146,7 +152,8 @@ class App extends Component {
               toDohandleCreate,
               toDohandleKeyPress,
               toDoHandleToggle,
-              todohandleRemove
+              todohandleRemove,
+              todoOnSelector
 
               } = this; 
 
@@ -208,10 +215,13 @@ class App extends Component {
                                               onkeyPress={toDohandleKeyPress}
                                               onChange={toDohandleChange}
                                               onCreate={toDohandleCreate}
+                                              color={color}
                                           />} 
 
                                     palette={<Palette 
                                                 colors={colorsArray}
+                                                selected={color}
+                                                onSelect={todoOnSelector}
                                                
                                           />}   
                                           >
