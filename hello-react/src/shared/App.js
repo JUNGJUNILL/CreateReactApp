@@ -5,7 +5,12 @@ import Menu from '../components/Menu'
 import {MyName,Counter} from 'P001_StudyComponent'
 import {PhoneForm,PhoneInfo,PhoneInfoList,PhonebookInput} from 'P002_PhoneBookComponent';
 import {TodoListTemplate,Form ,TodoItemList,Palette} from 'P003_TodoListComponent';
-
+import {
+        Button01,
+        Alerts,
+        Breadcrumb01
+} from 'P004_reactStrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 class App extends Component {
@@ -136,7 +141,14 @@ class App extends Component {
     }
 //end P003_TodoListComponent---------------------------------------------
 
+//start P004_reactStrap---------------------------------------------
 
+
+//end P004_reactStrap---------------------------------------------
+
+
+
+//하단부 화면 
     render() {     
 
         const {information,keyword,color} = this.state; 
@@ -178,10 +190,12 @@ class App extends Component {
                 <Route path="/myname/:name" component={MyName}/>
                 <Route path="/counter" component={Counter}/>  
                 
+                 
+                
               
               
               
-{/*P002_PhoneBookComponent*/}
+                {/*P002_PhoneBookComponent*/}
                 <Route path="/phonebook" render={()=>(
                 <div>
                   <PhoneForm onCreate={this.handleCreate} />
@@ -207,7 +221,7 @@ class App extends Component {
                                          {/*react Router로 props 보내는 방법*/}
 
 
-{/*P003_TodoListComponent*/}
+                {/*P003_TodoListComponent*/}
                 <Route path='/todoListtmplate' render={()=>(
                   
                   <TodoListTemplate form={<Form
@@ -235,12 +249,14 @@ class App extends Component {
                                 />
                   </TodoListTemplate>
                   
-
-
-                
-
+          
                 )} />
-                 
+
+                <Route path='/reactStrapeButton' component={Button01}/> 
+                <Route path='/reactStrapeAlerts' component={Alerts}/>
+                <Route path='/reactStrapeBreadcrumb01' component={Breadcrumb01}/>
+
+            
 
             </div>
            
