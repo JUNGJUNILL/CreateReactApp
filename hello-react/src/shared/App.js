@@ -5,11 +5,15 @@ import Menu from '../components/Menu'
 import {MyName,Counter} from 'P001_StudyComponent'
 import {PhoneForm,PhoneInfo,PhoneInfoList,PhonebookInput} from 'P002_PhoneBookComponent';
 import {TodoListTemplate,Form ,TodoItemList,Palette} from 'P003_TodoListComponent';
+
 import {
         Button01,
         Alerts,
-        Breadcrumb01
+        Breadcrumb01,
+        ButtonDropDown01,
+        Fade
 } from 'P004_reactStrap'
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -255,9 +259,10 @@ class App extends Component {
                 <Route path='/reactStrapeButton' component={Button01}/> 
                 <Route path='/reactStrapeAlerts' component={Alerts}/>
                 <Route path='/reactStrapeBreadcrumb01' component={Breadcrumb01}/>
-
+                <Route path='/reactStrapeButtonDropDown' component={ButtonDropDown01}/>                       
+                <Route path='/reactStrapeFade' component={Fade}/>                       
             
-
+                
             </div>
            
         );

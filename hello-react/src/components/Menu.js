@@ -13,6 +13,8 @@ const Menu = () => {
             <Badge href="/reactStrapeAlerts" color="primary">01.Alert</Badge>
             <Badge href="/reactStrapeButton" color="primary">02.button</Badge>
             <Badge href="/reactStrapeBreadcrumb01" color="primary">03.Breadcrumb</Badge>
+            <Badge href="/reactStrapeButtonDropDown" color="primary">04.ButtonDropDown</Badge>
+            <Badge href="/reactStrapeFade" color="primary">05.Fade</Badge>
             <ul>
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/about">About</Link></li>
