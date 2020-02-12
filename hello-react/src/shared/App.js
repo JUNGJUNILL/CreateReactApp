@@ -1,3 +1,5 @@
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import { Home, About,Posts } from 'pages';
@@ -5,6 +7,7 @@ import Menu from '../components/Menu'
 import {MyName,Counter} from 'P001_StudyComponent'
 import {PhoneForm,PhoneInfo,PhoneInfoList,PhonebookInput} from 'P002_PhoneBookComponent';
 import {TodoListTemplate,Form ,TodoItemList,Palette} from 'P003_TodoListComponent';
+import {HooksList} from 'P005_reactHooks';
 
 import {
         Button01,
@@ -14,7 +17,6 @@ import {
         Fade
 } from 'P004_reactStrap'
 
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 class App extends Component {
@@ -49,35 +51,41 @@ class App extends Component {
     }
 //start P002_PhoneBookComponent---------------------------------------------
     handleChange= (e) =>{
-      this.setState({
-          keyword:e.target.value, 
-      });
+        this.setState({
+          keyword:e.target.value,
+        });
     }
     
     handleCreate = (data) => {
-      const { information } = this.state;
+      const {information} =this.state; 
       this.setState({
-        information: information.concat({ id: this.id++, ...data }) //객체 spread 문법이다.
+        information : information.concat({id:this.id++,...data})
       })
+
     }
 
     handleRemove = (id)=>{
       const {information} = this.state; 
       this.setState({
-        information : information.filter(info=> info.id !== id)
+        information: information.filter(info => info.id !==id)
       })
+
     }
 
     handleUpdate =(id,data)=>{
 
-      const {information} = this.state; 
+      const {information} =this.state; 
       this.setState({
-        information : information.map(
-          info=> id ===info.id? {...info,...data} : info)
+        information:information.map(
+          info=> id === info.id? {...info,...data} : info 
+        )
       })
+
     }
 //end P002_PhoneBookComponent---------------------------------------------
     
+
+
 
 //start P003_TodoListComponent---------------------------------------------
     toDohandleChange= (e)=>{
@@ -201,27 +209,23 @@ class App extends Component {
               
                 {/*P002_PhoneBookComponent*/}
                 <Route path="/phonebook" render={()=>(
-                <div>
-                  <PhoneForm onCreate={this.handleCreate} />
-                  <p>
-                  <input 
-                      placeholder="검색 할 이름을 입력하세요..."
-                      onChange={this.handleChange}
-                      value={this.state.keyword}
-                  />
-                  {/*input에 입력시 
-                    App 컴포넌트의 상태가 업데이터 되면,
-                    컴포넌트 리렌더링이 발생하게 되고,
-                    컴포넌트가 리렌더링 되면 그 컴포넌트의 
-                    자식 컴포넌트도 리렌더링 됩니다.
-                  */}
-                </p>
-                  <PhoneInfoList data={filterList}
-                                 onRemove={this.handleRemove}
-                                 onUpdate={this.handleUpdate}
-                  />
-                </div>
+                                            <div>
+                                          
+                                              <PhoneForm onCreate={this.handleCreate}/>
+                                              <p>
+                                                  <input placeholder="검색 할 이름을 입력하세요.." 
+                                                         onChange={this.handleChange}
+                                                         value={keyword}
+                                                  />
+                                              </p>
+                                              <hr />
+                                              <PhoneInfoList data={filterList} 
+                                                             onRemove={this.handleRemove}
+                                                             onUpdate={this.handleUpdate}
+                                              />
+                                            </div>
                                                       )}/>
+                                              
                                          {/*react Router로 props 보내는 방법*/}
 
 
@@ -255,6 +259,8 @@ class App extends Component {
                   
           
                 )} />
+
+                <Route path='/reactHooks' component={HooksList}/>
 
                 <Route path='/reactStrapeButton' component={Button01}/> 
                 <Route path='/reactStrapeAlerts' component={Alerts}/>

@@ -19,6 +19,7 @@ const Posts = ({match}) => {
                 <li><NavLink to={`${match.url}/4`} activeStyle={style01}>Post #4</NavLink></li>
            </ul>
            <Route exact path={match.url} render={()=>(<h3>Please select any post</h3>)}/>
+                  {/*exact : 완전히 일치하는 url이 왔을 때 실행되게끔하는 라우터*/}
            <Route path={`${match.url}/:id`} component={Post}/>
         </div>
     );

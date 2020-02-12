@@ -5,7 +5,7 @@ const Problematic = () => {
     throw (new Error('버그가 나타났다!'));
     return (
       <div>
-        
+          "앙앙"
       </div>
     );
   };
@@ -31,7 +31,7 @@ class Counter extends Component{
   }
 
   componentDidMount() {
-      //여러분의 컴포넌트가 화면에 나타나게 됐을 때 호출됩니다.
+      //여러분의 컴포넌트가 화면에 나타나게 됐을 때(마운트 됬을 때) 호출됩니다.
       // 외부 라이브러리 연동을 하거나, 해당 컴포넌트에서 필요로하는 데이터를 요청하기 위해 
       //axios, fetch 등을 통하여 ajax 요청을 하거나, DOM 의 속성을 읽거나 
       //직접 변경하는 작업을 진행합니다.
@@ -40,6 +40,7 @@ class Counter extends Component{
   }
 
   shouldComponentUpdate(nextProps, nextState) {
+    //default true 반환 
     //false render() X , true render()  O 
 
     //쓸대없이 낭비되고 있는 이 CPU 처리량을 줄여주기 위해서 
@@ -68,15 +69,21 @@ getSnapshotBeforeUpdate(prevProps, prevState) {
 //DOM 변화가 일어나기 직전의 DOM 상태를 가져오고
 //여기서 return 값은 componentDidUpdate 3번째 파라메터로 
 //받아 온다. 
-return 'hello'
+console.log(prevState.number , " : " , this.state.number); 
+return prevState.number;
 }
 
 componentDidUpdate(prevProps, prevState, snapshot) {
 //최초 렌더링에서는 호출되지 않는다. 
+
 //갱신이 일어난 직후에 호출된다. 
 //컴포넌트 자신의 render 함수에서 에러가 발생해버리는 것은 잡아낼 수는 없지만
 //그 대신에 자식 컴포넌트 내부에서 발생하는 에러들을 잡아낼 수 있다. 
-    console.log('snapshot==>' , snapshot);
+
+    if(snapshot !== this.state.number){
+      console.log('항상 다를 수 밖에 없다.'); 
+    }
+
     console.log('componentDidUpdate');
 }
 
@@ -107,7 +114,7 @@ componentDidCatch(error, info) {
       }
     
       render() {
-        if (this.state.error) return (<h1>에러발생!</h1>);
+         if (this.state.error) return (<h1>에러발생!</h1>);
         return (
           <div>
             <h1>카운터</h1>

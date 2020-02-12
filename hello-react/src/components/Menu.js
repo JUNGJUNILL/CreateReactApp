@@ -25,12 +25,10 @@ const Menu = () => {
                 <li><NavLink to="/phonebook" activeStyle={style01}>P002_PhoneBookComponent</NavLink></li>
                 <li><NavLink to="/todoListtmplate" activeStyle={style01}>P003_TodoListComponent</NavLink></li>
                 <li><NavLink to="/reactStrapeAlerts" activeStyle={style01}>P004_reactStrap</NavLink></li>
-             
-
-                
+                <li><NavLink to="/reactHooks" activeStyle={style01}>P005_reactHooks</NavLink></li>
             </ul>
             <hr/>
-        </div>
+        </div>       
     );
 };
 

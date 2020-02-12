@@ -2,114 +2,109 @@ import React, { Component } from 'react';
 
 
 class PhoneInfo extends Component {
+  
+  static defaultProps ={
+    info : {
+      name : '이름',
+      phone : '010-2333-1234',
+      id: 0, 
+    }
+  }
+
+  state = {
+
+    editing : false, 
+    name    : '',
+    phone   : '',
+  }
 
 
-    static defaultProps = {
-        info: {
-          name: '이름',
-          phone: '010-0000-0000',
-          id: 0
-        }
-      }
 
-      state = {
+  handleRemove = () =>{
+    const {info , onRemove} = this.props; 
+    onRemove(info.id); 
+  }
 
-        editing: false, 
-        name:'',
-        phone:'',
+  handleToggleEdit = () =>{
+    const {editing} =this.state; 
+    this.setState({editing: !editing})
+  }
 
+  handleChange = (e) => {
+  
+    const {name,value} = e.target;
+    this.setState({
+      [name] : value 
+    }); 
 
-      }
-    handleRemove = () =>{
+  }
+  //최초 렌더링에서는 호출되지 않는다. 
+  //갱신이 일어난 직후에 호출된다.
 
-        const {info,onRemove} = this.props; 
-        onRemove(info.id); 
+  //컴포넌트 자신의 render 함수에서 에러가 발생해버리는 것은 잡아낼 수는 없지만
+  //그 대신에 자식 컴포넌트 내부에서 발생하는 에러들을 잡아낼 수 있다. 
+  
+  //prevState.editing 새롭게 마운트 되기 전 데이터 
+  componentDidUpdate(preveProps,prevState){
+    console.log('prevState.editing = ',prevState.editing, " : ",'this.state.editing = ',this.state.editing); 
+    const {info, onUpdate} = this.props;
 
+    //수정 버튼을 눌렀을 때, 
+    if(!prevState.editing && this.state.editing){
+      this.setState({
+        name:info.name,
+        phone:info.phone,
+      });
     }
 
-    handleToggleEdit = ()=>{
-        const {editing} = this.state; 
-        this.setState({editing:!editing}); 
-    }
-
-    handleChange = (e) => {
-        const { name, value } = e.target;
-        this.setState({
-          [name]: value
+    if(prevState.editing && !this.state.editing){
+        onUpdate(info.id,{
+          name:this.state.name,
+          phone:this.state.phone,
         });
-      }
+    }
+  }
 
-    componentDidUpdate(prevProps, prevState) {
-        //최초 렌더링에서는 호출되지 않는다. 
-        //갱신이 일어난 직후에 호출된다. 
-
-        // 여기서는, editing 값이 바뀔 때 처리 할 로직이 적혀있습니다.
-        // 수정을 눌렀을땐, 기존의 값이 input에 나타나고,
-        // 수정을 적용할땐, input 의 값들을 부모한테 전달해줍니다.
-        const { info, onUpdate } = this.props;
-        if(!prevState.editing && this.state.editing) {
-            console.log('01-prevState.editing=',prevState.editing,":",'this.state.editing=',this.state.editing)
- 
-          // editing 값이 false -> true 로 전환 될 때(즉, 수정 버튼 눌렀을 때)
-          // info 의 값을 state 에 넣어준다
-          this.setState({
-            name: info.name,
-            phone: info.phone
-          })
-        }
+    //갱신이 일어나면 실행된다. 
+    //default true반환 
+    //false render() X , true render() O
+  shouldComponentUpdate(nextProps, nextState) {
     
-        if (prevState.editing && !this.state.editing) {
-            console.log('02-prevState.editing=',prevState.editing,":",'this.state.editing=',this.state.editing)
- 
-          // editing 값이 true -> false 로 전환 될 때
-          onUpdate(info.id, {
-            name: this.state.name,
-            phone: this.state.phone
-          });
-        }
+    if(!this.state.editing
+        && !nextState.editing
+        && nextProps.info === this.props.info
+      ){
+        return false; 
       }
-
-      shouldComponentUpdate(nextProps, nextState) {
-        // 수정 상태가 아니고, info 값이 같다면 리렌더링 안함
-        if (!this.state.editing  
-            && !nextState.editing
-            && nextProps.info === this.props.info) {
-          return false;
-        }
-        // 나머지 경우엔 리렌더링함
-        return true;
-      }
+      
+      return true; 
+  }
 
 
-
-
-
-
-
-render(){
-    console.log('render PhoneInfo' + this.props.info.id); 
+  render(){
+    console.log('render PhoneInfo ' + this.props.info.id);
     const style = {
-        border: '1px solid blue',
-        padding: '8px',
-        margin: '8px'
-      };
+      border: '1px solid black',
+      padding: '8px',
+      margin: '8px'
+    };  
 
-      const {editing} = this.state; 
+    const {editing} = this.state; 
 
+    if(editing){
 
-      if(editing){
-          return (
-        <div style={style}>
+        return (
+          <div style={style}>
             <div>
-                <input 
-                    value={this.state.name}
-                    name="name"
-                    placeholder="이름"
-                    onChange={this.handleChange}
-                />
+              <input 
+                  value={this.state.name}
+                  name="name"
+                  placeholder="이름"
+                  onChange={this.handleChange}
+              />
             </div>
             <div>
-            <input 
+              <input 
                     value={this.state.phone}
                     name="phone"
                     placeholder="전화번호"
@@ -118,32 +113,25 @@ render(){
             </div>
             <button onClick={this.handleToggleEdit}>적용</button>
             <button onClick={this.handleRemove}>삭제</button>
+          </div>
+        );
+    }
 
 
-        </div>
-        )
-      }
-
-
-
-
-    const {
-        name, phone
-      } = this.props.info;
-      
-      return (
-
-        <div style={style}>
-            <div>{name}</div>
+        // 일반모드
+        const {
+          name, phone
+        } = this.props.info;
+        
+        return (
+          <div style={style}>
+            <div><b>{name}</b></div>
             <div>{phone}</div>
             <button onClick={this.handleToggleEdit}>수정</button>
             <button onClick={this.handleRemove}>삭제</button>
-        </div>
-      );
+          </div>
+        );
+  }
 }
-
-
-}
-
 
 export default PhoneInfo;

@@ -3,36 +3,38 @@ import PhoneInfo from './P002_PhoneInfo';
 
 class PhoneInfoList extends Component {
 
-    static defaultProps  = {
-        data:[]
+    static defaultProps ={
+        data : [],
+        onRemove: () => console.warn('onRemove not defined'),
+        onUpdate: () => console.warn('onUpdate not defined'),
     }
 
-    shouldComponentUpdate(nextProps,nextState){
-        nextProps.data.map((v)=> console.log('nextProps.data',v.name)) 
-        this.props.data.map((v)=> console.log('this.props',v.name)) 
-        
-        return nextProps.data !== this.props.data; 
-        //return 값이 false이면 render 안함 
-        //return 값이 true 이면 render 함 
-    }
+    //갱신이 일어나면 실행된다. 
+    //default true반환 
+    //false render() X , true render() O
+    //nextProps(전 컴포넌트의 props 데이터)
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log('shouldComponentUpdate');
+        console.log(nextProps.data, " : ", this.props.data);
+        return nextProps.data !== this.props.data;
+      }
 
     render(){
-        console.log('PhoneInfoList'); 
-        const {data,onRemove,onUpdate} = this.props;
-        const list = data.map(
-            (info)=>{ return<PhoneInfo 
-                            key={info.id} 
-                            info={info}
-                            onRemove={onRemove}
-                            onUpdate={onUpdate}
-                            />}
-        );
 
-            return(
-                <div>
-                    {list}
-                </div>
-            )
+        const {data,onRemove,onUpdate} = this.props; 
+        const list = data.map(
+            info=>(<PhoneInfo key={info.id} 
+                              info={info} 
+                              onRemove={onRemove}
+                              onUpdate={onUpdate}
+                 />)
+        ); 
+
+        return (
+            <div>
+                {list}
+            </div>
+        )
     }
 
 

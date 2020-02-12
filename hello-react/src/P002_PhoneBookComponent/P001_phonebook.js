@@ -1,5 +1,22 @@
-import React, { Component} from 'react'
+import React, { Component,useState} from 'react'
 
+/*const PhoneForm = () =>{
+    const [name,setName] = useState(''); 
+    const [phone,setPhone] = useState(''); 
+
+    const handleChange = (e) =>{
+        setName(e.target.value); 
+    }
+
+    const handleSubmit = (e) =>{
+        e.preventDefault(); 
+    }
+
+    return (
+
+    ); 
+}
+*/
 class PhoneForm extends Component {
 
     state = {
