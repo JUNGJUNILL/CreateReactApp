@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import {Hooks02} from 'P005_reactHooks'
+import {PhoneForm} from 'P005_reactHooks'
 
 const Btn = () =>{
-    const id = 2; 
+
+    const [id,setId] = useState(2); 
     const [visible,setVisble] = useState(false); 
     const [information,setInformation] = useState([{
                                                     id: 0,
@@ -16,12 +17,11 @@ const Btn = () =>{
                                                 }]);
 
     const handleCreate =(data)=>{
-        console.log(data); 
-        setInformation([{...data}]); 
-        information.map((v)=>{
-            console.log(v); 
-        })
-
+      
+        setId(id+1); 
+        const addObject = {...data,id:id}
+        setInformation(information=>[...information,addObject]);
+    
     }
 
 
@@ -30,7 +30,7 @@ const Btn = () =>{
         <div>
             <button onClick={()=>{setVisble(!visible);}}>{visible? '숨기기' : '보이기'}</button>
             <hr />
-            {visible && <Hooks02 onCreate={handleCreate}/>}
+            {visible && <PhoneForm onCreate={handleCreate} />}
             {JSON.stringify(information)}
         </div>
     
