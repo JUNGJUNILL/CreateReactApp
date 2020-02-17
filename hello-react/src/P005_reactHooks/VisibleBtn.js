@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {PhoneForm} from 'P005_reactHooks'
+import {PhoneInfoList} from 'P005_reactHooks'
 
 const Btn = () =>{
 
@@ -24,6 +25,18 @@ const Btn = () =>{
     
     }
 
+    const handleRemove =(id) =>{
+
+        setInformation(information.filter((info)=>info.id !==id));
+
+    }
+
+
+    const handleUpdate = (id,data) =>{
+
+
+    }
+
 
     return (
 
@@ -31,7 +44,10 @@ const Btn = () =>{
             <button onClick={()=>{setVisble(!visible);}}>{visible? '숨기기' : '보이기'}</button>
             <hr />
             {visible && <PhoneForm onCreate={handleCreate} />}
-            {JSON.stringify(information)}
+            <PhoneInfoList data={information} 
+                           onRemove={handleRemove}
+                           onUpdate={handleUpdate}
+            />
         </div>
     
     );  

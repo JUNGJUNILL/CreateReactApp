@@ -14,7 +14,7 @@
         }, [])
 */
 
-import React, {useState, useMemo, useCallback} from 'react'
+import React, {useState, useMemo, useCallback,useRef } from 'react'
 
 
 const getAverage = (numbers) =>{
@@ -30,6 +30,7 @@ const P004_Hooks04_useMemo = ()=>{
 
     const [list,setList] = useState([]); 
     const [number,setNumber] = useState(''); 
+    const inputEl = useRef(null); 
 
     //onChange, onInsert라는 함수를 선언해주었다. 
     //이렇게 선선을 하게 되면 컴포넌트가 리렌더링 될 때마다 이 함수들이
@@ -47,6 +48,7 @@ const P004_Hooks04_useMemo = ()=>{
         const nextList = list.concat(parseInt(number)); 
         setList(nextList); 
         setNumber(''); 
+        inputEl.current.focus();
     },[number,list]); 
     //  ▲number , list가 바뀔 때마다 함수 생성 
     
