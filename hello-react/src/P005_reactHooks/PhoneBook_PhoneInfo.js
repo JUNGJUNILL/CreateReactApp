@@ -1,13 +1,12 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useRef} from 'react'
+import { useParams } from 'react-router-dom';
 
 
-
-export const usePreviousProps = (value) =>{
-
-    const ref = useRef(); 
+const usePrevious = (value)=>{
+    const ref= useRef(); 
     useEffect(()=>{
-            ref.current.value; 
-    });
+        ref.current.value;
+    }); 
     return ref.current; 
 }
 //https://velog.io/@velopert/react-hooks#2-useeffect
@@ -18,20 +17,19 @@ const PhoneInfo = (props)=>{
 
     const {info,onRemove,onUpdate} =props; 
     const [editing,setEditing] = useState(false); 
+    //const [preEditing,setPreEditing] = useState(true); 
+
+    const [name,setName] = useState(''); 
+    const [phone,setPhone] = useState(''); 
     
+    //const[preName,setPreName] = useState(''); 
+    //const[prePhone,setPrePhone] = useState(''); 
+
     const style = {
                     border: '1px solid black',
                     padding: '8px',
                     margin: '8px'
     };           
-
-    const preveProps = usePreviousProps({info}); 
-    useEffect(()=>{
-        if(preveProps.info.name !== info.name){
-            console.log('달라'); 
-        }
-    },[info]); 
-
 
     const handleRemove =()=>{
         onRemove(info.id); 
@@ -39,34 +37,60 @@ const PhoneInfo = (props)=>{
     }
 
     const handleToggleEdit =()=>{
-
-        setEditing(!editing); 
+             
+        setEditing(!editing);
 
     }
 
-    const handleChange = (e) =>{
-     
+
+
+    const handleChange01 = (e) =>{
+        // const {name , value} = e.target; 
+        // if(name==='name'){
+          
+        // }else if(name==='phone'){
+
+        // }
+        //console.log(e.target.value); 
+        setName(e.target.value); 
     }
 
+    const handleChange02 = (e) =>{
+      // const {name , value} = e.target; 
+      // if(name==='name'){
+        
+      // }else if(name==='phone'){
+
+      // }
+      //console.log(e.target.value); 
+      setPhone(e.target.value); 
+  }
+
+
+
+    useEffect(()=>{
+        //console.log('실행됨',editing)
+   
+    }); 
 
    if(editing){
-
+       
     return (
         <div style={style}>
         <div>
           <input
-            value={info.name}
+            value={name}
             name="name"
             placeholder="이름"
-            onChange={handleChange}
+            onChange={handleChange01}
           />
         </div>
         <div>
           <input
-            value={info.phone}
+            value={phone}
             name="phone"
             placeholder="전화번호"
-            onChange={handleChange}
+            onChange={handleChange02}
           />
         </div>
         <button onClick={handleToggleEdit}>적용</button>
@@ -75,11 +99,11 @@ const PhoneInfo = (props)=>{
     )
 
    }else{
-
+       
     return (
         <div style={style}>
-        <div><b>{name}</b></div>
-        <div>{phone}</div>
+        <div><b>{info.name}</b></div>
+        <div>{info.phone}</div>
         <button onClick={handleToggleEdit}>수정</button>
         <button onClick={handleRemove}>삭제</button>
       </div>

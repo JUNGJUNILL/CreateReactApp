@@ -57,6 +57,7 @@ class PhoneInfo extends Component {
       });
     }
 
+    //적용 버튼 눌렀을 때, 
     if(prevState.editing && !this.state.editing){
         onUpdate(info.id,{
           name:this.state.name,
@@ -69,7 +70,8 @@ class PhoneInfo extends Component {
     //default true반환 
     //false render() X , true render() O
   shouldComponentUpdate(nextProps, nextState) {
-    
+      console.log(this.state.editing, " : ", nextState.editing); 
+                  //false                     //true 
     if(!this.state.editing
         && !nextState.editing
         && nextProps.info === this.props.info

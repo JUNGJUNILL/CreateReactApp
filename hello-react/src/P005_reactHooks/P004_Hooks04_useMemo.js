@@ -14,7 +14,7 @@
         }, [])
 */
 
-import React, {useState, useMemo, useCallback,useRef } from 'react'
+import React, {useState, useMemo, useCallback,useRef ,current} from 'react'
 
 
 const getAverage = (numbers) =>{
@@ -30,7 +30,10 @@ const P004_Hooks04_useMemo = ()=>{
 
     const [list,setList] = useState([]); 
     const [number,setNumber] = useState(''); 
-    const inputEl = useRef(null); 
+    const inputEl = useRef();
+    // ref관련 자료 https://velopert.com/1148
+    // useRef를 사용하하여 ref(react에서 직접 돔으로 접근할 때)
+    // 를 설정하면, useRef 를 통해 만든 객체 안의 current 값이 실제 엘리먼트를 가르키게 됩니다. 
 
     //onChange, onInsert라는 함수를 선언해주었다. 
     //이렇게 선선을 하게 되면 컴포넌트가 리렌더링 될 때마다 이 함수들이
@@ -67,7 +70,7 @@ const P004_Hooks04_useMemo = ()=>{
 
     return (
         <div>
-            <input value={number} onChange={onChange} />
+            <input value={number} onChange={onChange} ref={inputEl}/>
             <button onClick={onInsert}>등록</button>
             <ul>    
                 {list.map((value,index) => (

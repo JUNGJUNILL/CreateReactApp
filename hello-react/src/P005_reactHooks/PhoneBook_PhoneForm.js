@@ -19,7 +19,11 @@ const PhoneForm  =(props) =>{
 
     //리액트 컴포넌트가 렌더링 될 때마다 
     //특정 작업을 수행하도록 설정 할 수 있는 Hooks이다. 
-
+    useEffect(()=>{
+        console.log('렌더링이 완료되었습니다.'); 
+        console.log({name,phone}); 
+       // if()
+    },[name])
 
      
      const handleSubmit = (e) =>{

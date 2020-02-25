@@ -33,8 +33,7 @@ const Btn = () =>{
 
 
     const handleUpdate = (id,data) =>{
-
-
+        setInformation(information.map(info=>id===info.id? {...info,...data}:info));
     }
 
 

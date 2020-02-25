@@ -5,7 +5,9 @@ import
      Hooks02,
      Hooks03,
      VisibleBtn,
-     ExUseMemo} 
+     ExUseMemo,
+     Test
+     } 
 from 'P005_reactHooks';
 
 const HooksList = ({match}) => {
@@ -28,6 +30,7 @@ return (
           <li><NavLink to={`${match.url}/2`} activeStyle={style01}>hooks#2</NavLink></li>
           <li><NavLink to={`${match.url}/3`} activeStyle={style01}>hooks#3</NavLink></li>
           <li><NavLink to={`${match.url}/4`} activeStyle={style01}>hooks#4</NavLink></li>
+          <li><NavLink to={`${match.url}/5`} activeStyle={style01}>hooks#5</NavLink></li>
      </ul>
       
      <Route exact path={match.url} render={()=>(<h3>Please select any post</h3>)}/>
@@ -58,6 +61,13 @@ return (
 
 <div>
   <ExUseMemo />
+</div>
+)}/>
+
+<Route exact path={`${match.url}/5`} render={()=>(
+
+<div>
+  <Test />
 </div>
 )}/>
 
