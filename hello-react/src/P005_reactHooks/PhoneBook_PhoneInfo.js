@@ -1,4 +1,4 @@
-import React,{useState,useEffect,useRef} from 'react'
+import React,{useState,useEffect,useRef,useCallback} from 'react'
 import { useParams } from 'react-router-dom';
 
 
@@ -37,41 +37,30 @@ const PhoneInfo = (props)=>{
     }
 
     const handleToggleEdit =()=>{
-             
-        setEditing(!editing);
+      setEditing(!editing);
+        if(!editing){ 
+          setName(info.name); 
+          setPhone(info.phone); 
+          console.log('수정버튼',editing); 
+          
+        }else{
 
+          onUpdate(info.id,{name,phone}); 
+          console.log('적용버튼'); 
+        }
+
+      
     }
 
-
-
     const handleChange01 = (e) =>{
-        // const {name , value} = e.target; 
-        // if(name==='name'){
-          
-        // }else if(name==='phone'){
-
-        // }
-        //console.log(e.target.value); 
+ 
         setName(e.target.value); 
+              console.log(name);
     }
 
     const handleChange02 = (e) =>{
-      // const {name , value} = e.target; 
-      // if(name==='name'){
-        
-      // }else if(name==='phone'){
-
-      // }
-      //console.log(e.target.value); 
       setPhone(e.target.value); 
   }
-
-
-
-    useEffect(()=>{
-        //console.log('실행됨',editing)
-   
-    }); 
 
    if(editing){
        
@@ -99,7 +88,7 @@ const PhoneInfo = (props)=>{
     )
 
    }else{
-       
+       //const {info} = props; 
     return (
         <div style={style}>
         <div><b>{info.name}</b></div>

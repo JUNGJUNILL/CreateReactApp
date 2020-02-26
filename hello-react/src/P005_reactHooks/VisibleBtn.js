@@ -26,6 +26,7 @@ const Btn = () =>{
     }
 
     const handleRemove =(id) =>{
+        
 
         setInformation(information.filter((info)=>info.id !==id));
 
@@ -33,6 +34,7 @@ const Btn = () =>{
 
 
     const handleUpdate = (id,data) =>{
+        console.log('data',data); 
         setInformation(information.map(info=>id===info.id? {...info,...data}:info));
     }
 
