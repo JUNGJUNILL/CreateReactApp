@@ -1,22 +1,25 @@
 import React, { useState, useEffect } from 'react';
+import Info from './P001_Hooks_useEffect'; 
 
 //useEffect()
-//첫 마운트 때는 실행되지 않는다. 
-//두번째 파라메터에 빈 배열을 넣으면 언마운트 될 때만 실행됩니다. 
-
 //리엑트 컴포넌트가 렌더링 될 때마다 특정 작업을 수행하도록 설정 할 수 있는 Hooks이다. 
+//두번째 파라메터에 빈 배열을 넣어주면 첫 마운트 때만 실행된다. 
+//특정 값이 업데이트 될 때만 실행시키리면 해당 요소를 배열에 넣으면 된다. 
+
 //https://velog.io/@velopert/react-hooks#2-useeffect
-const  Info =()=> {
 
-    const [name, setName] = useState('');
-    const [nickname, setNickname] = useState('');
-    const [preName,setPreName] =  useState('');
+const App = ()=>{
 
-    useEffect(()=>{
-        console.log('렌더링이 완료되었습니다.'); 
-        console.log({name,nickname});
+    const [visivle,setVisible] = useState(false); 
 
-        return () =>{
+    // useEffect(()=>{
+    //     console.log('렌더링이 완료되었습니다.'); 
+    //     console.log({name,nickname});
+
+    //     return ()=>{
+    //         console.log('언마운트'); 
+    //     }
+      /*  return () =>{
         //뒷정리하기
         //useEffect는 기본적으로 렌더링 되고난 직후마다 실행되며, 
         //두번째 파라메터 배열에 무엇을 넣는냐에 따라 실행되는 조건이 달라진다. 
@@ -25,13 +28,13 @@ const  Info =()=> {
             console.log('cleanUp'); 
             console.log('뒷정리',name); //업데이트 되기 직전값을 가져올 수 있다. 
         }
+    */
+
+    // })
 
 
-    })
 
-
-
-
+/*
     const onChangeName = e => {
         setName(e.target.value);
       };
@@ -39,19 +42,26 @@ const  Info =()=> {
       const onChangeNickname = e => {
         setNickname(e.target.value);
       };
-
+*/
 
     return (
-<div>
-        <input type="text" onChange={onChangeName} value={name} />
-        <input type="text" onChange={onChangeNickname} value={nickname} />
-        이름 : {name}
-        닉네임 : {nickname}
-</div>
+        <div>
+        <button onClick={()=>{
+            setVisible(!visivle);
+        }}>
+            {visivle?'숨기기':'보이기'}
+       
+        </button>
+        <hr/>
+        {visivle && <Info/>}
+        </div>
+ 
+
+
 
     )
 
 
 }
 
-export default Info; 
+export default App; 

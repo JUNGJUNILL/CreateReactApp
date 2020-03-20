@@ -26,10 +26,7 @@ const Btn = () =>{
     }
 
     const handleRemove =(id) =>{
-        
-
         setInformation(information.filter((info)=>info.id !==id));
-
     }
 
 

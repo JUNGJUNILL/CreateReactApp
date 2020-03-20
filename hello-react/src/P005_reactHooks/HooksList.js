@@ -6,7 +6,8 @@ import
      Hooks03,
      VisibleBtn,
      ExUseMemo,
-     Test
+     Test,
+     App
      } 
 from 'P005_reactHooks';
 
@@ -27,10 +28,11 @@ return (
      <h2>Hooks List</h2> 
     <ul>
           <li><NavLink to={`${match.url}/1`} activeStyle={style01}>hooks#1</NavLink></li>
-          <li><NavLink to={`${match.url}/2`} activeStyle={style01}>hooks#2</NavLink></li>
+          <li><NavLink to={`${match.url}/2`} activeStyle={style01}>hooksPhoneBook</NavLink></li>
           <li><NavLink to={`${match.url}/3`} activeStyle={style01}>hooks#3</NavLink></li>
-          <li><NavLink to={`${match.url}/4`} activeStyle={style01}>hooks#4</NavLink></li>
-          <li><NavLink to={`${match.url}/5`} activeStyle={style01}>hooks#5</NavLink></li>
+          <li><NavLink to={`${match.url}/4`} activeStyle={style01}>useMemo</NavLink></li>
+          <li><NavLink to={`${match.url}/5`} activeStyle={style01}>useEffect</NavLink></li>
+          <li><NavLink to={`${match.url}/6`} activeStyle={style01}>hooksTodoList</NavLink></li>
      </ul>
       
      <Route exact path={match.url} render={()=>(<h3>Please select any post</h3>)}/>
@@ -71,6 +73,13 @@ return (
 </div>
 )}/>
 
+
+<Route exact path={`${match.url}/6`} render={()=>(
+
+<div>
+  <App />
+</div>
+)}/>
 
 
      
