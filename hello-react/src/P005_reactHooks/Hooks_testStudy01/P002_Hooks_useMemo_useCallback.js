@@ -43,9 +43,14 @@ const P004_Hooks04_useMemo = ()=>{
     const onChange = useCallback((e) =>{
         console.log('onChange'); 
         setNumber(e.target.value); 
-    },[]) //
+    },[]); //
     // ▲빈 배열을 넣었을 경우, 처음 마운트 되었을 때만 함수 생성됨  
 
+
+    //함수 내부에서 기존의 상태 값을 의존해야 할 때는 꼭 두번째 파라미터 안에 포함을 시켜주어야 합니다. 
+    //예를 들어서 onChange 의 경우엔 기존의 값을 조회하는 일은 없고 바로 설정만 하기 때문에 
+    //배열이 비어있어도 상관이 없지만 onInsert 는 기존의 number 와 list 를 조회해서 nextList 를 생성하기 때문에 
+    //배열 안에 number 와 list 를 꼭 넣어주어야 합니다.
     const onInsert = useCallback((e) =>{
         console.log('onInsert'); 
         const nextList = list.concat(parseInt(number)); 
@@ -60,13 +65,12 @@ const P004_Hooks04_useMemo = ()=>{
     //우리가 만든 getAverage함수가 호출됨을 알 수 있다. 인풋 내용이 바뀔 땐 평균 값을 
     //다시 계산 할 필요가 없는데, 이렇게 렌더링 할 때마다 자원이 낭비가 된다. 
 
-    //함수 내부에서 기존의 상태 값을 의존해야 할 때는 꼭 두번째 파라미터 안에 포함을 시켜주어야 합니다. 
-    //예를 들어서 onChange 의 경우엔 기존의 값을 조회하는 일은 없고 바로 설정만 하기 때문에 
-    //배열이 비어있어도 상관이 없지만 onInsert 는 기존의 number 와 list 를 조회해서 nextList 를 생성하기 때문에 
-    //배열 안에 number 와 list 를 꼭 넣어주어야 합니다.
+    //렌더링하는 과정에서 특정 값이 바뀌었을 때만 연산을 실행하고, 만약에 원하는 값이 바뀐 것이 아니라면
+    //이전에 연산했던 결과를 다시 사용하는 방식이다.
 
-    const avg = useMemo(()=>getAverage(list),[list]); 
-    //이렇게 설정을 해 놓으면 배열의 내용이 바뀔 때만 getAverage함수가 실행된다. 
+     const avg =useMemo(()=>getAverage(list),[list]); 
+    //                                         ▲   
+    //              이렇게 설정을 해 놓으면 두번째 파라메터(list) 내용이 바뀔 때만 getAverage함수가 실행된다. 
 
     return (
         <div>
@@ -78,8 +82,7 @@ const P004_Hooks04_useMemo = ()=>{
                 ))}
             </ul>
             <div>
-                {/* <b>평균 값:</b>{avg} */}
-
+                {/*<b>평균 값:</b>{getAverage(list)}*/}
                 <b>평균 값:</b>{avg}
             </div>
         </div>

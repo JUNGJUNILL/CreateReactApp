@@ -1,7 +1,9 @@
 import React from 'react'
 import './CSS/TodoListTemplate.css';
+import './CSS/Palette.css';
 
-const TodoListTemplate = ({form,children}) =>{
+
+const TodoListTemplate = ({form,children,palette}) =>{
 
         return (
 
@@ -9,6 +11,9 @@ const TodoListTemplate = ({form,children}) =>{
                     <div className="title">
                         오늘 할 일
                     </div>
+                    <section className>
+                        {palette}
+                    </section>
                     <section className="form-wrapper">
                         {form}
                     </section>

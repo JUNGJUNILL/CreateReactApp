@@ -3,8 +3,8 @@ import './CSS/TodoItem.css'
 
 const TodoItem = (props) =>{
 
-    const {text, checked, id, onToggle, onRemove, key} = props; 
-    
+    const {text, checked, id, onToggle, onRemove, color} = props; 
+ 
     return(
         <div className="todo-item" onClick={()=>onToggle(id)}>
             <div className="remove" onClick={(e)=>{
@@ -14,7 +14,7 @@ const TodoItem = (props) =>{
                                                     onRemove(id)
                                             }}>&times;</div>
             <div className={`todo-text ${checked && 'checked'}`}>
-                <div>{text}</div>
+                <div style={{color}}>{text}</div>
             </div>
             {
                 checked && (<div className="check-mark"></div>)
