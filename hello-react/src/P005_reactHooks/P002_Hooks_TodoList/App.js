@@ -11,7 +11,7 @@ const App = () =>{
     const [todos,setTodos] =  useState([{ id: 0, text: ' 리액트 소개', checked: false },
                                         { id: 1, text: ' 리액트 소개', checked: true },
                                         { id: 2, text: ' 리액트 소개', checked: false }]);
-
+ 
     const [colorArray,setColorArray] = useState(['#343a40', '#f03e3e', '#12b886', '#228ae6']); 
     const [color , setColor] =  useState(colorArray[0]);
 
