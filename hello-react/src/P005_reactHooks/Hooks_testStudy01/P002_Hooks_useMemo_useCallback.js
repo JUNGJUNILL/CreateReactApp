@@ -40,6 +40,10 @@ const P004_Hooks04_useMemo = ()=>{
     //새로 생성된다. 대부분의 경우에는 이러한 방식이 문제가 되지 않지만, 
     //컴포넌트의 렌더링이 자주 발생하거나, 렌더링 해야 할 컴포넌트의 개수가 많아진다면, 
     //이 부분을 최적화 해주는것이 좋다. 
+
+    //PROPS로 넘겨주는 함수나 메서드는 useCallback을 사용해야 한다.
+    //컴포넌트가 변화할 때마다 해당 함수들이 새로 생성되기 때문이다.
+    //★★이 말은 해당 함수를 사용중인 자식 컴포넌트들이 리렌더링 되기 때문이다.
     const onChange = useCallback((e) =>{
         console.log('onChange'); 
         setNumber(e.target.value); 
