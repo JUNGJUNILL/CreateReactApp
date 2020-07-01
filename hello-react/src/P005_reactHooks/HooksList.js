@@ -7,20 +7,18 @@ import
      VisibleBtn,
      ExUseMemo,
      Test,
-     App
+     App,
+     Ref,
+     HooksRef
      } 
 from 'P005_reactHooks';
 
 const HooksList = ({match}) => {
-  console.log(match.url); 
+  console.log('match.url==>' , match.url); 
   const style01 = {
     color: 'green',
     fontSize: '2rem'
 };
-
-const test  = (a) =>{
-  console.log(a); 
-}
 
 return (
 
@@ -32,7 +30,9 @@ return (
           <li><NavLink to={`${match.url}/3`} activeStyle={style01}>hooks#3</NavLink></li>
           <li><NavLink to={`${match.url}/4`} activeStyle={style01}>useMemo</NavLink></li>
           <li><NavLink to={`${match.url}/5`} activeStyle={style01}>useEffect</NavLink></li>
-          <li><NavLink to={`${match.url}/6`} activeStyle={style01}>hooksTodoList</NavLink></li>
+          <li><NavLink to={`${match.url}/6`} activeStyle={style01}>Ref</NavLink></li>
+          <li><NavLink to={`${match.url}/7`} activeStyle={style01}>RefHooks</NavLink></li>
+          <li><NavLink to={`${match.url}/8`} activeStyle={style01}>hooksTodoList</NavLink></li>
      </ul>
       
      <Route exact path={match.url} render={()=>(<h3>Please select any post</h3>)}/>
@@ -75,6 +75,21 @@ return (
 
 
 <Route exact path={`${match.url}/6`} render={()=>(
+
+<div>
+  <Ref />
+</div>
+)}/>
+
+
+<Route exact path={`${match.url}/7`} render={()=>(
+
+<div>
+  <HooksRef />
+</div>
+)}/>
+
+<Route exact path={`${match.url}/8`} render={()=>(
 
 <div>
   <App />
