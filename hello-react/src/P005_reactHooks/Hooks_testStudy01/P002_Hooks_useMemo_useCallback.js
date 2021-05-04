@@ -82,7 +82,7 @@ const P004_Hooks04_useMemo = ()=>{
                 ))}
             </ul>
             <div>
-                {/*<b>평균 값:</b>{getAverage(list)}*/}
+                {/*<b>평균 값:</b>{getAverage(list)}!!*/}
                 <b>평균 값:</b>{avg}
             </div>
         </div>
