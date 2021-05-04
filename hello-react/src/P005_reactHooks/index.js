@@ -6,6 +6,8 @@ export { default as Hooks03 }    from './P003_Hooks03';
 //Hooks_testStudy01
 export { default as ExUseMemo }  from './Hooks_testStudy01/P002_Hooks_useMemo_useCallback';
 export { default as Test }       from './Hooks_testStudy01/P000_HooksTESTComponent';
+export { default as Ref }        from './Hooks_testStudy01/P003_Hooks_ref';
+export { default as HooksRef }   from './Hooks_testStudy01/P004_Hooks_ref01';
 
 //P001_Hooks_PhoneBook
 export { default as VisibleBtn } from './P001_Hooks_PhoneBook/VisibleBtn';

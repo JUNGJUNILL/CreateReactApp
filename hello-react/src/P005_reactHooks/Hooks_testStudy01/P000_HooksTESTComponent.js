@@ -10,7 +10,13 @@ import Info from './P001_Hooks_useEffect';
 
 const App = ()=>{
 
-    const [visivle,setVisible] = useState(false); 
+    const [visivle,setVisible] = useState(false);   
+    const [excute, setExcute] = useState(false);
+
+    const btnClick = () =>{
+
+        setExcute(true); 
+    }
 
     // useEffect(()=>{
     //     console.log('렌더링이 완료되었습니다.'); 
@@ -46,10 +52,8 @@ const App = ()=>{
 
     return (
         <div>
-        <button onClick={()=>{
-            setVisible(!visivle);
-        }}>
-            {visivle?'숨기기':'보이기'}
+        <button onClick={btnClick}>
+           
        
         </button>
         <hr/>
